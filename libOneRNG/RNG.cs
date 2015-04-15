@@ -9,6 +9,8 @@ namespace libOneRNG
     /// </summary>
     public class RNG : IDisposable
     {
+        private const int SPEED = 9600;
+
         /// <summary>
         /// Possible RNG Modes to activate
         /// </summary>
@@ -37,13 +39,29 @@ namespace libOneRNG
             }
         }
 
+        public static bool PortExists(string Port)
+        {
+            if (string.IsNullOrEmpty(Port))
+            {
+                return false;
+            }
+            foreach (string s in Ports)
+            {
+                if (s.ToUpper() == Port.ToUpper())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Initializes a new OneRNG
         /// </summary>
         /// <param name="Port">Serial Port</param>
         public RNG(string Port)
         {
-            SP = new SerialPort(Port,9600,Parity.None,8,StopBits.One);
+            SP = new SerialPort(Port, SPEED , Parity.None, 8, StopBits.One);
             SP.Handshake = Handshake.RequestToSend;
             //this throws an exception if the device no longer accepts commands
             SP.WriteTimeout = 1000;
