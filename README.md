@@ -1,8 +1,25 @@
-# WinOneRNG
-provides OneRNG Support for Windows
+# General
 
-This application offers a TCP server that tries to distribute the random data
-evenly over all connected devices.
+This is a collection of tools for [the OneRNG Device](http://onerng.info/),
+which is an open source hardware entropy source (random number generator).
+
+# Driver
+
+Please install the driver from the DRV subdirectory or the original site.
+A readme with instructions is given in the DRV subdirectory.
+uder Windows, OneRNG operates as a serial Port device. You must install the driver before
+you can use any of the applications in this repository.
+
+## Backup driver
+
+If the original driver is unavailable (see README.md in DRV directory),
+the .inf file required for installation is located in the DRV subdirectory.
+No other files are required.
+
+# OneRNG Applications
+
+All OneRNG Applications listed below are written in C# using .NET 2.0.
+Therefore they share some requirements:
 
 ## Requirements
 
@@ -13,10 +30,15 @@ to .NET 4.5 without errors, if you prefer to upgrade the project.
 
 ## Build
 
-The application should build as-is, since there are no additional dependencies.
+All applications should build as-is, since there are no additional dependencies.
+if you do not want to build them yourself,
+see for the bin/Release folder inside each project for precompiled binaries.
 
-Have a look at rnd\bin\Release\rnd.exe for a pre-built executable and DLL if you
-prefer to run precompiled versions.
+# WinOneRNG
+provides OneRNG Support for Windows
+
+This application offers a TCP server that tries to distribute the random data
+evenly over all connected devices.
 
 ## Configuration
 
@@ -33,7 +55,43 @@ PortName=COM1
 
 ```
 
-The values you see above are the defaults, that get applied, if no file is present.
+The values you see above are the defaults which are applied, if no file is present.
+
+### [NET]
+
+Settings in the NET section
+
+#### IP
+
+This is the IP address to listen on. You can specify any IP your host identifies with,
+including: any localhost address, any network interface address, the global 0.0.0.0 address.
+
+To find all network intrerface addresses, open a command prompt and type
+```ipconfig /all | find "IPv"```
+
+You can also use IPv6 addresses, if you prefer.
+
+#### Port
+
+This is the TCP port to listen on. Use any number in the range from 1 to ushort.MaxValue
+
+#### BlockSize
+
+This is the number of bytes, each connected node gets before the application switches to the next node.
+OneRNG is not very fast at generating numbers,
+if you find people having to wait a long time for their turn, you can decrease this number.
+This number only reflects the random bytes and not the header.
+If you set this number to a very small number, you will have quite high network overhead.
+
+### [SerialPort]
+
+Settings in the SerialPort section
+
+#### PortName
+
+The name of the serial port to use. This is case insensitive.
+You can get the port name from device manager or from the command prompt, by typing
+```MODE | find "COM"``` or by running fileGen without arguments (see below).
 
 # libOneRNG
 
@@ -48,6 +106,8 @@ This tool allows you to generate files from OneRNG.
 
 Below is the command line help, that is shown, if no arguments are provided.
 fileGen also reports all available ports below the help.
+
+Information during generation is sent to stderr.
 
 ```
 fileGen.exe <Port> [/D Directory] [/M Mask] [/S FileSize] [/N NumFiles]
@@ -67,3 +127,11 @@ Port   Serial Port to use. See below for the list of available ports.
        is also infinite.
 
 ```
+
+## Notes
+
+/M argument: Counting files starts at 1. You can specify a mask,
+that generates names identical to existing files.
+FileGen will append random data to it,
+if it is too short for the specified size (/S argument).
+If it is the same length or longer, it is skipped.
