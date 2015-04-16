@@ -135,3 +135,43 @@ that generates names identical to existing files.
 FileGen will append random data to it,
 if it is too short for the specified size (/S argument).
 If it is the same length or longer, it is skipped.
+
+# concat
+
+This is a simple file concatenation utility. It can work with advanced wildcards
+like ```C:\Users\*\Documents\report_201?_*.xls```.
+The example would concat all report excel files from 2010 to 2019 from any users document folder.
+
+A ```?``` represents exactly 1 character
+
+A ```*``` represents 0 or more characters
+
+To make masks with "at least X chars" use X times a ```?``` in the name before using ```*```
+
+Example: ```..\???*.exe``` will find all exe files from the parent directory with at least 3 chars
+before the file extension.
+
+## memory usage
+
+It uses an internal 512 MB buffer, which will greatly increase concat speed.
+The effect is not noticeable on very fast harddrives or SSD Drives.
+My computer at home has a rotary disk, that is too slow for my internet connection.
+
+5400 RPM with a 200 Mbit/s torrent download (random writes) is simply clogging the drive.
+
+If you suffer the same issue, use this tool, otherwise a ```CMD.EXE /C COPY /B *.bin test.rnd```
+will be as fast or even faster than this tool.
+
+## Usage
+
+No command line help available. Supply 2 or more arguments. The last argument is the output file,
+which is deleted if it exists, the other arguments are assumed to be either single files or file masks.
+If a file cannot be found or a mask yields 0 results,
+the application terminates without touching the output file.
+
+## MaskMatch.cs
+
+This is the magic class, that supports masks on multiple directory levels.
+Feel free to use it in your own projects.
+It will work with relative paths as well as with absolute paths.
+The return value is matching to how you specified the argument (relative/absolute).
