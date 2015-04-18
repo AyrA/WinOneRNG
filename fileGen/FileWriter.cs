@@ -96,7 +96,7 @@ namespace fileGen
                     CurrentStream.Dispose();
                     CurrentStream = null;
                 }
-                if (++CurrentNumber > Count)
+                if (++CurrentNumber > Count && Count > 0)
                 {
                     return false;
                 }

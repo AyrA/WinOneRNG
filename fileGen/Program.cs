@@ -27,7 +27,7 @@ namespace fileGen
 #if DEBUG
             args = new string[]
             {
-                "COM3","/S","1","/N","2", "/M","test_!_yay.bin","/D",@"R:\RNG"
+                "COM3","/S","10","/N","0", "/M","rnd_!.bin","/D",@"C:\TEMP\RNG"
             };
 #endif
             if (args.Length > 0)
