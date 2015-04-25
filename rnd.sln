@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fileGen", "fileGen\fileGen.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "concat", "concat\concat.csproj", "{7C46A886-2B7A-4284-91B7-C6AA48D1411E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rndTest", "rndTest\rndTest.csproj", "{7510170D-EF06-4154-9523-5309F2E552F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{7C46A886-2B7A-4284-91B7-C6AA48D1411E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C46A886-2B7A-4284-91B7-C6AA48D1411E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C46A886-2B7A-4284-91B7-C6AA48D1411E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7510170D-EF06-4154-9523-5309F2E552F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7510170D-EF06-4154-9523-5309F2E552F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7510170D-EF06-4154-9523-5309F2E552F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7510170D-EF06-4154-9523-5309F2E552F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
